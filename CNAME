@@ -1,3 +1,9 @@
-"records": {
-    "CNAME": "beanboi12064.github.io"
+{
+    "owner": {
+        "username": "BEANboii12064",
+        "email": "[email protected]"
+    },
+    "records": {
+        "CNAME": "github-username.github.io"
+    }
 }
