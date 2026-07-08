@@ -1,0 +1,167 @@
+<body style="background: conic-gradient(#ff0000, #00ff0a, #0000ff, #ffff00); background-attachment: fixed; height: 100vh;">
+<h1>Welcome to the Kingdom of Bibbet, whom is our leader!</h1>
+<script>
+  function increaseBoredom() {
+    // 1. Find the number inside the span
+    let currentLevel = document.getElementById("boredomNum").innerText;
+    
+    // 2. Turn it into a real number and add 1
+    let newLevel = parseInt(currentLevel) + 1;
+    
+    // 3. Put the new number back on the page
+    document.getElementById("boredomNum").innerText = newLevel;
+
+    // 4. Secret Message at 100%
+    if (newLevel >= 100) {
+      alert("CRITICAL BOREDOM REACHED! BIBBET IS DISPLEASED!");
+    }
+  }
+</script>
+<!-- The Status Tracker -->
+<p>Current Boredom Level: <span id="boredomNum" style="font-weight:bold;">12</span>%</p>
+
+<!-- The Mobile-Friendly Buttons -->
+<div style="display: flex; gap: 10px; margin-bottom: 20px;">
+  
+  <!-- Increases Boredom -->
+  <button type="button" onclick="adjustBoredom(1)" style="flex: 1; padding: 20px; background-color: #ff4d4d; color: white; border: 3px solid black; border-radius: 15px; font-weight: bold;">
+    I'M BORED!
+  </button>
+
+  <!-- Decreases Boredom -->
+  <button type="button" onclick="adjustBoredom(-1)" style="flex: 1; padding: 20px; background-color: #4dff88; color: black; border: 3px solid black; border-radius: 15px; font-weight: bold;">
+    I'M ENTERTAINED!
+  </button>
+  
+</div>
+
+<script>
+  function adjustBoredom(change) {
+    // 1. Get the current number from the page
+    let display = document.getElementById("boredomNum");
+    let currentLevel = parseInt(display.innerText);
+    
+    // 2. Add or subtract based on which button was clicked
+    let newLevel = currentLevel + change;
+    
+    // 3. Keep the number between 0 and 100 so it doesn't break
+    if (newLevel < 0) { newLevel = 0; }
+    if (newLevel > 100) { newLevel = 100; }
+    
+    // 4. Update the page with the new number
+    display.innerText = newLevel;
+
+    // 5. Special messages for the extremes
+    if (newLevel === 100) {
+      alert("CRITICAL BOREDOM! BIBBET IS DISPLEASED!");
+    } else if (newLevel === 0) {
+      alert("MAXIMUM ENTERTAINMENT! THE KINGDOM REJOICES!");
+    }
+  }
+</script>
+
+<p>THE STASH:</p>
+<ul>
+  <li>Bibbet (the King)</li>
+  <li>Gatorade</li>
+  <li>Baked beans are cool!</li>
+</ul>
+<ul> your stats:
+  <li>xxbananaboi12064xx.neocities.org = at </li>
+  <li>Reading: this </li>
+  <li>Boredom:0-100%</li>
+  </ul>
+<h2>ts fire! its bean number 1!</h2>
+<img src=Bean_pngs/Bean.png>
+<h6>ts also fire! Its bean number 2!</h6>
+<img src=Bean_pngs/Bean_2.png>
+<h3>BUTTON!</h3>
+<button type="button" onclick="alert('YOU CLIKCED THE BUTTON! NOW YOU WILL DIE! its a joke')" style="font-size; 80px; padding: 40px 80px; background-color: black; color: #00ff0a; border: 10px solid white; border-radius: 20px; font-weight: bold; cursor:pointer;">
+BUTTON!
+</button>
+<h4> Heres some games i made on scratch </h4>
+<ul>
+  <li><a href="https://scratch.mit.edu/projects/1287911917/">Find the beans V8</a></li>
+  <li><a href="https://scratch.mit.edu/projects/1276562871">Draw a boat</a></li>
+  <li><a href="https://scratch.mit.edu/projects/1259881556">POV: Meow</a></li>
+  <li><a href="https://scratch.mit.edu/projects/1259881556">Grow a garden</a></li>
+</ul>
+<button type="button" onclick="alert('You have sent a messge to:911. sending message HELP HELP HELP to 911')">
+DO NOT CLICK UNDEUNDER ANY CIRCUMSTANCE!
+</button>
+<ul> these are screenshots from my minecraft world
+  <li><img src=Minecraftpngs/Housefront.png></li>
+  <li><img src=Minecraftpngs/Houseinside.png></li>
+  <li><img src=Minecraftpngs/Netherportal.png></li>
+</ul>
+  <marquee>MINECRAFT IS SUPER FUN!</marquee>
+  <h3>THE BIBBET CONTROL PANEL</h3>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px;">
+
+  <!-- BUTTON 1: THE DISCO BUTTON -->
+  <button type="button" onclick="document.body.style.background = 'linear-gradient(' + Math.random()*360 + 'deg, #ff0000, #00ff0a, #0000ff, #ffff00)'" 
+          style="padding: 20px; background: white; color: black; border: 4px solid black; border-radius: 10px; font-weight: bold;">
+    DISCO MODE!
+  </button>
+
+  <!-- BUTTON 2: THE BEAN GROWER -->
+  <button type="button" onclick="document.querySelectorAll('img').forEach(img => img.style.width = (img.clientWidth + 10) + 'px')" 
+          style="padding: 20px; background: #964B00; color: white; border: 4px solid black; border-radius: 10px; font-weight: bold;">
+    GROW THE BEANS!
+  </button>
+
+  <!-- BUTTON 3: THE BIBBET SHAKE -->
+  <button type="button" onclick="document.body.style.transform = 'rotate(' + (Math.random()*10 - 5) + 'deg)'" 
+          style="padding: 20px; background: #00ff0a; color: black; border: 4px solid black; border-radius: 10px; font-weight: bold;">
+    TILT THE KINGDOM!
+  </button>
+
+  <!-- BUTTON 4: THE "WHO AM I?" BUTTON -->
+  <button type="button" onclick="let name = prompt('What is your name, traveler?'); alert('WELCOME TO THE KINGDOM, ' + name.toUpperCase() + '!')" 
+          style="padding: 20px; background: black; color: white; border: 4px solid #00ff0a; border-radius: 10px; font-weight: bold;">
+    IDENTIFY YOURSELF!
+  </button>
+
+</div>
+
+<div style="background: black; color: #00ff0a; padding: 20px; border: 5px solid white; border-radius: 15px; margin-top: 20px; font-family: monospace;">
+  <h2 style="text-align: center; color: yellow;">THE BIBBET-IZER 3000</h2>
+  <textarea id="englishInput" placeholder="Type normal words here..." style="width: 100%; height: 60px; margin-bottom: 10px;"></textarea>
+  <button onclick="translateToBibbet()" style="width: 100%; padding: 15px; background: #00ff0a; font-weight: bold; cursor: pointer;">TRANSLATE TO BIBBET-SPEAK</button>
+  <div id="bibbetOutput" style="margin-top: 20px; background: #222; padding: 10px; border: 2px dashed #00ff0a; min-height: 40px; word-break: break-all;"></div>
+</div>
+
+<script>
+function translateToBibbet() {
+  const dictionary = {
+    'a': 'tr', 'b': 'fh', 'c': '35', 'd': '78', 'e': '5ts', 'f': '80h', 'g': '26s', 'h': '1f', 'i': 'g', 'j': 'h',
+    'k': 's5', 'l': 'ho9', 'm': 'po3', 'n': 'v2', 'o': 'f0j', 'p': 'tf4', 'q': '4ft', 'r': 'd5s', 's': '48h', 't': 'v80',
+    'u': 'v35', 'v': 'u53', 'w': 'uu5', 'x': 'e3', 'y': '5g8', 'z': '26y',
+    '0': 'x!x', '1': '2@y', '2': 'z#3', '3': '4$x', '4': '5%x', '5': '6^y', '6': '7&x', '7': '8*z', '8': '9(y', '9': '0)z',
+    '+': 'A/<', '-': 'A/>', '*': 'AA/<', '/': '/>',
+    '.': '|\\', ',': '/', '!': '/|/\\|', '?': 'w×>q', ' ': ' '
+  };
+
+  let input = document.getElementById('englishInput').value.toLowerCase();
+  let output = '';
+  
+  for (let char of input) {
+    output += dictionary[char] || char;
+  }
+  
+  document.getElementById('bibbetOutput').innerText = output;
+}
+</script>
+
+
+<button type="button" onclick="alert ('YOU CLICKED RHIS BUTTON! BIBBET IS DISPLEASED WITH YOU FOR THIS!')">ORDINARY BUTTON!</button>
+
+<button type="button" onclick="let name = prompt('WHAT WEAPON DO YOU WANT?'); alert('HERE YOU GO, THOSE ARE DANGEROUS THEM ' + name.toUpperCase() + '!')">
+  CHOOSE YOUR WEAPON!
+</button>
+
+26sd5sf0juu5 tr 26strd5s785tsv2 z#3 g48h 35f0jpo3gv226s 48hf0jf0jv2/|/\|
+
+ <h4>ok thats all i have. bye bye! Maybe! IDK you can stay play a scratch game. Do whatever!</h4>
+ 
