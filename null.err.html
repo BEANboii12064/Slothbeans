@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Error: null.err</title>
+    <style>
+        /* This sets up the look of the fake error page */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #202124;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: #E8EAED;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .error-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 400px;
+            padding: 20px;
+            text-align: left;
+            box-sizing: border-box;
+        }
+
+        .icon { font-size: 50px; margin-bottom: 20px; color: #9AA0A6; }
+        h1 { font-size: 24px; font-weight: 400; margin: 0 0 12px 0; }
+        p { font-size: 14px; line-height: 20px; margin: 0 0 24px 0; color: #E8EAED; }
+        .error-code { font-size: 12px; color: #9AA0A6; margin-bottom: 30px; }
+        .btn { background-color: #8AB4F8; color: #202124; border: none; padding: 10px 24px; font-size: 14px; font-weight: 500; border-radius: 4px; }
+
+        /* This hides the secret sandbox until you unlock it */
+        #sandboxCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            display: none;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LAYER 1: The Disguise (Fake Crash Screen) -->
+    <div class="error-container" id="errorScreen">
+        <div class="icon">☹</div>
+        <h1>Aw, Snap!</h1>
+        <p>Something went wrong while displaying this webpage. The file <strong>null.err.html</strong> could not be rendered properly due to a memory corruption event.</p>
+        <div class="error-code">Error code: STATUS_BREAKPOINT</div>
+        <button class="btn">Reload</button>
+    </div>
+
+    <!-- LAYER 2: The Secret Sandbox Canvas -->
+    <canvas id="sandboxCanvas"></canvas>
+
+    <script>
+        const errorScreen = document.getElementById('errorScreen');
+        const canvas = document.getElementById('sandboxCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        let clickCount = 0;
+        let lastClickTime = 0;
+        let particles = [];
+        let isUnlocked = false;
+
+        // SECRET TRIGGER: Detects 3 quick taps anywhere on the screen
+        window.addEventListener('pointerdown', (e) => {
+            if (isUnlocked) return;
+
+            const currentTime = new Date().getTime();
+            if (currentTime - lastClickTime < 400) {
+                clickCount++;
+            } else {
+                clickCount = 1;
+            }
+            lastClickTime = currentTime;
+
+            if (clickCount === 3) {
+                unlockSandbox();
+            }
+        });
+
+        function unlockSandbox() {
+            isUnlocked = true;
+            errorScreen.style.display = 'none';
+            canvas.style.display = 'block';
+            resizeCanvas();
+            animate();
+        }
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+
+        // Particle Class for the glowing fluid look
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 6 + 2;
+                this.speedX = (Math.random() - 0.5) * 8;
+                this.speedY = (Math.random() - 0.5) * 8;
+                // Generates glowing neon blues, purples, and cyans
+                this.color = `hsl(${Math.random() * 60 + 190}, 100%, 60%)`;
+                this.alpha = 1;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.speedX *= 0.96; // Adds fluid resistance friction
+                this.speedY *= 0.96;
+                this.alpha -= 0.015; // Makes particles fade away softly
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                // Gives the particles a glowing light effect
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = this.color;
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        // Spawns particles when you drag your fingers across the tablet screen
+        window.addEventListener('pointermove', (e) => {
+            if (!isUnlocked) return;
+            for (let i = 0; i < 3; i++) {
+                particles.push(new Particle(e.clientX, e.clientY));
+            }
+        });
+
+        // The animation loop that updates the fluid screen smoothly
+        function animate() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'; // Leaves a beautiful faint motion blur trail
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                if (particles[i].alpha <= 0) {
+                    particles.splice(i, 1);
+                    i--;
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+    </script>
+</body>
+</html>
